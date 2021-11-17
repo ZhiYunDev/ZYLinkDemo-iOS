@@ -1,0 +1,6 @@
+framework module ZYDeviceSDK {
+  umbrella header "ZYDeviceSDK.h"
+
+  export *
+  module * { export * }
+}

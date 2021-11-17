@@ -1,0 +1,8 @@
+platform :ios, '9.0'
+use_frameworks!
+target 'OtherBluetoothTest' do
+  pod 'BabyBluetooth'
+  pod 'SVProgressHUD'
+  
+end
+project './OtherBluetoothTest.xcodeproj'
