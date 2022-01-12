@@ -217,6 +217,25 @@
     }
 }
 
+-(void)clickedInDevice:(ZYDevice *)device funcEventCodeAndParam:(NSArray *)funcEventArray{
+    NSMutableString *mutString = [NSMutableString stringWithFormat:@"%@",[device displayName]];
+    for (int i =0; i < funcEventArray.count; i ++) {
+        NSDictionary *dic = funcEventArray[i];
+        NSString *key = dic.allKeys.firstObject;
+        NSString *value = dic[key];
+
+        NSString *funcEventCodeString = [NSString stringWithFormat:@"%lx",(unsigned long)[key integerValue]];
+        NSString *funcEventParamString = [NSString stringWithFormat:@"%ld",[value integerValue]];
+        NSString *str = [NSString stringWithFormat:@" code: %@  param： %@ ",funcEventCodeString,funcEventParamString];
+        NSLog(@"i = %d %@",i,str);
+        [mutString appendString:str];
+    }
+    NSLog(@"%@",mutString);
+
+    [SVProgressHUD showInfoWithStatus:mutString];
+
+}
+
 -(void)clickedInDevice:(ZYDevice *)device funcEventCode:(NSUInteger)funcEventCode funcEventParam:(NSUInteger)funcEventParam{
     NSString *funcEventCodeString = [NSString stringWithFormat:@"%lx",(unsigned long)funcEventCode];
     NSString *funcEventParamString = [NSString stringWithFormat:@"%ld",funcEventParam];

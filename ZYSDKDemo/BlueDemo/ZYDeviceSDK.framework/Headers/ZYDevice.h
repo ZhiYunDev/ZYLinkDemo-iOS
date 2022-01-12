@@ -68,7 +68,18 @@
   @param funcEventParam funcevent param
  */
 -(void)clickedInDevice:(ZYDevice *)device funcEventCode:(NSUInteger)funcEventCode funcEventParam:(NSUInteger)funcEventParam;
+/**
+  功能组合事件
+  @param device 设备
+ @param funcEventArray @[@{@(funcEventCode):@(funcEventParam),@(funcEventCode):@(funcEventParam)}]，设备组合发出两个或以上功能事件的数据
+ */
 
+/**
+  funcevent
+  @param device device
+  @param funcEventArray @[@{@(funcEventCode):@(funcEventParam)}]
+ */
+-(void)clickedInDevice:(ZYDevice *)device funcEventCodeAndParam:(NSArray *)funcEventArray;
 
 @end
 
