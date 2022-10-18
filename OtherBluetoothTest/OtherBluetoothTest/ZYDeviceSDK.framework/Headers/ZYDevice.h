@@ -203,6 +203,14 @@
 -(void)writeData:(NSData *)data;
 
 /**
+ 写数据，需要加crc的数据，只对数据长度大于4的数据加crc
+
+ @param data 数据
+ @param needAddCrc 是否需要添加CRC
+ */
+-(void)writeData:(NSData *)data needAddCrc:(BOOL)needAddCrc;
+
+/**
  获取3个轴的位置
  @param handler 俯仰轴位置 横滚轴位置 航向轴位置
  */

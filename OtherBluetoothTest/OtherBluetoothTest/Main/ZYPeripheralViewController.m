@@ -36,13 +36,41 @@
     self.babytooth.having(self.device.peripheral).and.channel(channelOnPeropheralView).then.connectToPeripherals().discoverServices().discoverCharacteristics().readValueForCharacteristic().discoverDescriptorsForCharacteristic().readValueForDescriptors().begin();
 }
 
+- (NSData *)convertHexStrToData:(NSString *)str
+{
+    if (!str || [str length] == 0) {
+        return nil;
+    }
+    
+    NSMutableData *hexData = [[NSMutableData alloc] initWithCapacity:20];
+    NSRange range;
+    if ([str length] % 2 == 0) {
+        range = NSMakeRange(0, 2);
+    } else {
+        range = NSMakeRange(0, 1);
+    }
+    for (NSInteger i = range.location; i < [str length]; i += 2) {
+        unsigned int anInt;
+        NSString *hexCharStr = [str substringWithRange:range];
+        NSScanner *scanner = [[NSScanner alloc] initWithString:hexCharStr];
+        
+        [scanner scanHexInt:&anInt];
+        NSData *entity = [[NSData alloc] initWithBytes:&anInt length:1];
+        [hexData appendData:entity];
+        
+        range.location += range.length;
+        range.length = 2;
+    }
+    return hexData;
+}
+
 - (void)sendAction:(UIBarButtonItem *)iten{
     
     //给非智云设备发送示例
-    NSData * data = [@"123456" dataUsingEncoding:NSUTF8StringEncoding];
-    [self writeValue:ZYUUIDs.ZYServiceUUID characteristicUUID:ZYUUIDs.ZYCharacteristicUUID_Write data:data withPeripheral:self.device.peripheral];
-    
-    //测试示例(智云设备)
+    NSData * data = [self convertHexStrToData:@"243e0c00181508200000000000000000"];
+//    [self writeValue:ZYUUIDs.ZYServiceUUID characteristicUUID:ZYUUIDs.ZYCharacteristicUUID_Write data:data withPeripheral:self.device.peripheral];
+    [self.device.device writeData:data needAddCrc:YES];
+////    测试示例(智云设备)
 //    [self.device.device queryCurrectAxisesPosition:^(float pitch, float roll, float yaw, BOOL success) {
 //        NSLog(@"pitch = %f roll = %f yaw = %f,success = %d",pitch,roll,yaw,success);
 //        [self.device.device moveToPitch:pitch roll:roll yaw:yaw + 10 withInTime:2 compeletion:^(BOOL success) {
