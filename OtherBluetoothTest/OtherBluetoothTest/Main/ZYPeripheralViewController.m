@@ -41,6 +41,7 @@
     if (!str || [str length] == 0) {
         return nil;
     }
+     
     
     NSMutableData *hexData = [[NSMutableData alloc] initWithCapacity:20];
     NSRange range;
