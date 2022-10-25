@@ -187,6 +187,26 @@ typedef NS_ENUM(NSInteger, ZYDeviceStatus) {
     ZYDeviceStatusTobeMissed,
 };
 
+/**
+ 工作模式
+
+ - ZYBleDeviceWorkModeFollow: 航向跟随模式
+ - ZYBleDeviceWorkModeLock: 锁定模式
+ - ZYBleDeviceWorkModeFullyFollow: 全跟随模式
+ - ZYBleDeviceWorkModePOV: POV模式
+ - ZYBleDeviceWorkModeGo: GO模式
+ - ZYBleDeviceWorkMode360: V模式
+ */
+typedef NS_ENUM(NSUInteger, ZYBleDeviceWorkMode) {
+    ZYBleDeviceWorkModeUnkown        =   -1,
+    ZYBleDeviceWorkModeFollow        =   0,
+    ZYBleDeviceWorkModeLock          =   1,
+    ZYBleDeviceWorkModeFullyFollow   =   2,
+    ZYBleDeviceWorkModePOV           =   3,
+    ZYBleDeviceWorkModeGo            =   4,
+    ZYBleDeviceWorkMode360           =   5,
+};
+
 //发送数据的block
 typedef void (^SendDataBlock)(NSData *data);
 

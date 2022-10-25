@@ -81,6 +81,14 @@
  */
 -(void)clickedInDevice:(ZYDevice *)device funcEventCodeAndParam:(NSArray *)funcEventArray;
 
+
+/**
+  onModeChanged
+  @param device device
+  @param onModeChanged 工作模式改变
+ */
+-(void)device:(ZYDevice *)device onModeChanged:(ZYBleDeviceWorkMode)workMode;
+
 @end
 
 @interface ZYDevice : NSObject

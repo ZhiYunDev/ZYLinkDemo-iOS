@@ -253,6 +253,36 @@
     
 }
 
+-(void)device:(ZYDevice *)device onModeChanged:(ZYBleDeviceWorkMode)workMode{
+    NSString *workModeString = [self workModeStringWithMode:workMode];
+    NSString *str = [NSString stringWithFormat:@"%@ 工作模式: %@",device.displayName,workModeString];
+    NSLog(@"%@",str);
+    [SVProgressHUD showInfoWithStatus:str];
+}
+
+-(NSString *)workModeStringWithMode:(ZYBleDeviceWorkMode)workMode{
+    switch (workMode) {
+        case ZYBleDeviceWorkModeUnkown:
+            return @"未知";
+        case ZYBleDeviceWorkModeFollow:
+            return @"航向跟随模式";
+        case ZYBleDeviceWorkModeLock:
+            return @"锁定模式";
+        case ZYBleDeviceWorkModeFullyFollow:
+            return @"全跟随模式";
+        case ZYBleDeviceWorkModePOV:
+            return @"POV模式";
+        case ZYBleDeviceWorkModeGo:
+            return @"GO模式";
+        case ZYBleDeviceWorkMode360:
+            return @"V模式";
+        
+        default:
+            break;
+    }
+
+}
+
 -(NSString *)eventStringWithEvent:(ZYKeyEvent)event{
     switch (event) {
         case ZYKeyEventNone:
