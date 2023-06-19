@@ -3,6 +3,18 @@ use_frameworks!
 target 'OtherBluetoothTest' do
   pod 'BabyBluetooth'
   pod 'SVProgressHUD'
-  
+
+  ##为了解决筛选不到teamid的导致build不成功的bug
+  post_install do |installer|
+    installer.generated_projects.each do |project|
+      project.targets.each do |target|
+          target.build_configurations.each do |config|
+            config.build_settings["DEVELOPMENT_TEAM"] = "DQFEA2B5H2"
+            config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "9.0"
+
+           end
+      end
+    end
+  end
 end
 project './OtherBluetoothTest.xcodeproj'
